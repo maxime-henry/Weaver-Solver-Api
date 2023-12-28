@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from mangum import Mangum
 from solver import WeaverSolver
 
