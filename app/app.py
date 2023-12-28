@@ -37,4 +37,8 @@ def solver(start, end):
 
 
 def handler(event, context):
+    http_method = event.get('httpMethod', 'UNKNOWN_METHOD')
+
+    # Rest of your code...
+
     return awsgi.response(app, event, context)
