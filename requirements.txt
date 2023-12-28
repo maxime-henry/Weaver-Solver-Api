@@ -1,2 +1,2 @@
-aws-wsgi==0.2.7
-Flask==3.0.0
+fastapi==0.108.0
+mangum==0.17.0

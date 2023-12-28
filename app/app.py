@@ -1,44 +1,36 @@
-import awsgi
-from flask import Flask, jsonify
-
+from fastapi import FastAPI, HTTPException
+from mangum import Mangum
 from solver import WeaverSolver
 
+app = FastAPI()
 
-app = Flask(__name__)
-
-
-@app.route('/')
+@app.get('/')
 def index():
-    return jsonify(status=200, message='Hello Maksk!')
+    return {'status': 200, 'message': 'Hello Maksk!'}
 
-
-@app.route('/solver/<start>/<end>')
-def solver(start, end):
-    try :
+@app.get('/solver/{start}/{end}')
+def solver(start: str, end: str):
+    try:
         print(start, end)
-        solver = WeaverSolver("tmp/weaver_graph.json")
-        result = solver.solve(start, end)
+        solver_instance = WeaverSolver("tmp/weaver_graph.json")
+        result = solver_instance.solve(start, end)
         nb_mots = len(result)
         print(result, nb_mots)
-        
+
         response_data = {
             'status': 200,
             'message': 'Success',
             'result': result,
             'nb_mots': nb_mots
         }
-    except:
-        response_data =    {
+    except Exception as e:
+        response_data = {
             'status': 500,
             'message': 'Internal Server Error',
+            'error_details': str(e)
         }
 
-    return jsonify(response_data)
+    return response_data
 
-
-def handler(event, context):
-    http_method = event.get('httpMethod', 'UNKNOWN_METHOD')
-
-    # Rest of your code...
-
-    return awsgi.response(app, event, context)
+# The following part is for AWS Lambda integration using awsgi
+handler = Mangum(app, lifespan="off")
