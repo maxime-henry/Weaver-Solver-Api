@@ -32,5 +32,5 @@ def solver(start: str, end: str):
 
     return response_data
 
-# The following part is for AWS Lambda integration using awsgi
+
 handler = Mangum(app, lifespan="off")
