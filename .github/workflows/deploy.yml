@@ -68,19 +68,19 @@ jobs:
         with:
           name: api
 
-      # - name: configure aws credentials
-      #   uses: aws-actions/configure-aws-credentials@v1.7.0
-      #   with:
-      #     role-to-assume: arn:aws:iam::685832139437:oidc-provider/token.actions.githubusercontent.com #change to reflect your IAM role’s ARN
-      #     role-session-name: GitHub_to_AWS_via_FederatedOIDC
-      #     aws-region: "us-east-1"
-
-
-      - name: Upload to S3
-        run: aws s3 cp api.zip s3://weaver-solver/api.zip 
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: arn:aws:iam::685832139437:oidc-provider/token.actions.githubusercontent.com
-          AWS_DEFAULT_REGION: "us-east-1"
+          role-to-assume: arn:aws:iam::685832139437:oidc-provider/token.actions.githubusercontent.com #change to reflect your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: "us-east-1"
+
+
+      # - name: Upload to S3
+      #   run: aws s3 cp api.zip s3://weaver-solver/api.zip 
+      #   with:
+      #     role-to-assume: arn:aws:iam::685832139437:oidc-provider/token.actions.githubusercontent.com
+      #     AWS_DEFAULT_REGION: "us-east-1"
 
 
         # env:
