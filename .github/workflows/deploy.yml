@@ -53,6 +53,7 @@ jobs:
 
 
     runs-on: ubuntu-latest
+    environment: deployment
     needs: [continuous-integration]
     if: github.ref == 'refs/heads/main'
     steps:
