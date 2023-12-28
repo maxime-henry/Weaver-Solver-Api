@@ -72,7 +72,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
           role-to-assume: arn:aws:iam::685832139437:oidc-provider/token.actions.githubusercontent.com #change to reflect your IAM role’s ARN
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          # role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: "us-east-1"
 
 
