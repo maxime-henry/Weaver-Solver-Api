@@ -53,30 +53,30 @@ from fastapi import FastAPI, Form
 
 app = FastAPI()
 
-@app.get("/solve")
-async def solve_wordle(start: str = Form(...), end: str = Form(...)):
-    try:
-        solver_instance = WeaverSolver("tmp/weaver_graph.json")
-        result = solver_instance.solve(start, end)
-        nb_mots = len(result)
-        print(result, nb_mots)
-        joke = make_joke(start, end)
+# @app.get("/solve")
+# async def solve_wordle(start: str = Form(...), end: str = Form(...)):
+#     try:
+#         solver_instance = WeaverSolver("tmp/weaver_graph.json")
+#         result = solver_instance.solve(start, end)
+#         nb_mots = len(result)
+#         print(result, nb_mots)
+#         joke = make_joke(start, end)
 
-        response_data = {
-            "status": 200,
-            "message": "Success",
-            "result": result,
-            "nb_mots": nb_mots,
-            "joke": joke,
-        }
-    except Exception as e:
-        response_data = {
-            "status": 500,
-            "message": "Internal Server Error",
-            "error_details": str(e),
-        }
+#         response_data = {
+#             "status": 200,
+#             "message": "Success",
+#             "result": result,
+#             "nb_mots": nb_mots,
+#             "joke": joke,
+#         }
+#     except Exception as e:
+#         response_data = {
+#             "status": 500,
+#             "message": "Internal Server Error",
+#             "error_details": str(e),
+#         }
 
-    return response_data
+#     return response_data
 
 
 @app.get("/solver/{start}/{end}")
